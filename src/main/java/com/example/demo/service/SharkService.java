@@ -1,11 +1,14 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.CreateSharkRequest;
+import com.example.demo.dto.SharkResponse;
 import com.example.demo.exception.SharkNotFoundException;
 import com.example.demo.repository.SharkRepository;
 import com.example.demo.dto.UpdateSharkRequest;
 import com.example.demo.entity.Shark;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SharkService {
@@ -20,9 +23,28 @@ public class SharkService {
         return sharkRepository.findAll();
     }
 
+    // Entity 찾기
     public Shark findById(Long id) {
         return sharkRepository.findById(id)
                 .orElseThrow(() -> new SharkNotFoundException(id));
+    }
+
+    public SharkResponse findResponseById(Long id) {
+        Shark shark = sharkRepository.findById(id)
+                .orElseThrow();
+
+        // 물고기 이름만 추출
+        List<String> fishNames = shark.getFishes()
+                .stream()
+                .map(fish -> fish.getName())
+                .toList();
+
+        return new SharkResponse(
+                shark.getId(),
+                shark.getName(),
+                shark.getSpecies(),
+                fishNames
+        );
     }
 
     public Shark save(CreateSharkRequest request) {

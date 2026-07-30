@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CreateSharkRequest;
+import com.example.demo.dto.SharkResponse;
 import com.example.demo.service.SharkService;
 import com.example.demo.dto.UpdateSharkRequest;
 import com.example.demo.entity.Shark;
@@ -24,8 +25,8 @@ public class SharkController {
     }
 
     @GetMapping("/{id}")
-    public Shark getSharkById(@PathVariable Long id) {
-        return sharkService.findById(id);
+    public SharkResponse getSharkById(@PathVariable Long id) {
+        return sharkService.findResponseById(id);
     }
 
     @PostMapping
