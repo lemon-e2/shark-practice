@@ -8,8 +8,10 @@ import com.example.demo.entity.Shark;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/sharks")
+@RequestMapping("/shark")
 public class SharkController {
 
     private final SharkService sharkService;
@@ -20,7 +22,7 @@ public class SharkController {
     }
 
     @GetMapping
-    public Iterable<Shark> getSharks() {
+    public List<Shark> getSharks() {
         return sharkService.findAll();
     }
 

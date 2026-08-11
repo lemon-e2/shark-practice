@@ -17,7 +17,7 @@ public class Fish {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shark_id")
     @JsonIgnore
     private Shark shark;

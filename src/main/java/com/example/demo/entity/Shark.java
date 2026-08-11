@@ -24,7 +24,9 @@ public class Shark {
     private String species;
 
     // mappedBy: private Shark shark를 가리키고, 관계주인이 Fish.shark 라는 것을 JPA에게 알려준다.
-    @OneToMany(mappedBy = "shark")
+    @OneToMany(
+            mappedBy = "shark"
+    )
     // 상어: 내가 먹은 물고기들을 알고 싶다.
     private List<Fish> fishes;
 }

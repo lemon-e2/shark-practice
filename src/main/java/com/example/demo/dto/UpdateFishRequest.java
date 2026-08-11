@@ -3,9 +3,9 @@ package com.example.demo.dto;
 import lombok.Getter;
 
 @Getter
-public class UpdateSharkRequest {
+public class UpdateFishRequest {
 
     private String name;
-    private String species;
+    private Long sharkId;
 
 }
