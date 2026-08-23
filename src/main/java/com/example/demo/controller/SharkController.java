@@ -36,6 +36,8 @@ public class SharkController {
         return sharkService.save(request);
     }
 
+    // @PathVariable URL에서 어떤 상어를 가져올지 가져옴
+    // @RequestBody HTTP 요청의 JSON 본문을 가져옴3
     @PutMapping("/{id}")
     public Shark updateShark(@PathVariable Long id, @RequestBody UpdateSharkRequest request) {
         return sharkService.update(id, request);

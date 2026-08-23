@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CreateFishRequest;
+import com.example.demo.dto.FishResponse;
 import com.example.demo.dto.UpdateFishRequest;
 import com.example.demo.entity.Fish;
 import com.example.demo.service.FishService;
@@ -19,14 +20,15 @@ public class FishController {
         this.fishService = fishService;
     }
 
+    // required parameter
     @GetMapping
-    public List<Fish> getFish() {
-        return fishService.findAll();
+    public List<FishResponse> getFish(@RequestParam(required = false) Long sharkId) {
+        return fishService.findAll(sharkId);
     }
 
     @GetMapping("/{id}")
-    public Fish getFishById(@PathVariable Long id) {
-        return fishService.findById(id);
+    public FishResponse getFishById(@PathVariable Long id) {
+        return fishService.findResponseById(id);
     }
 
     @PostMapping
