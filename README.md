@@ -1,4 +1,4 @@
-# 🦈 Shark & Fish API
+# 🦈 Shark-Practice
 
 Spring Boot와 JPA를 사용하여 Shark와 Fish의 관계를 관리하는 간단한 REST API 학습 프로젝트.
 
