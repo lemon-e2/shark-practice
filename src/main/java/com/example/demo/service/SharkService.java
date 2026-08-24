@@ -10,6 +10,7 @@ import com.example.demo.dto.UpdateSharkRequest;
 import com.example.demo.entity.Shark;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,19 +30,32 @@ public class SharkService {
         this.fishRepository = fishRepository;
     }
 
-    // 아무것도 없을때는 빈 List[]를 반환
-    public List<Shark> findAll() {
-        return sharkRepository.findAll();
-    }
+    public List<SharkResponse> findAll() {
+        List<Shark> sharks = sharkRepository.findAll();
+        List<SharkResponse> sharkResponses = new ArrayList<>();
 
-    // Entity 찾기
-    // 아무것도 없으면 null을 반환하기 때문에 그것을 방지하기 위해 Optional로 분기를 나눔
-    public Shark findById(Long id) {
-        return sharkRepository.findById(id)
-                .orElseThrow(() -> new SharkNotFoundException(id));
+        for (Shark shark : sharks) {
+
+            // shark에 fish 들이 있다면 돌면서 fish 이름을 가져오고 없다면 빈 []를 리턴
+            List<String> fishNames = shark.getFishes()
+                    .stream()
+                    .map(fish -> fish.getName())
+                    .toList();
+
+            // 그렇게 하나하나씩 shark의 데이터를 sharkresponse에 차곡차곡 넣기
+            SharkResponse response = new SharkResponse(
+                    shark.getName(),
+                    shark.getSpecies(),
+                    fishNames
+            );
+
+            sharkResponses.add(response);
+        }
+        return sharkResponses;
     }
 
     public SharkResponse findResponseById(Long id) {
+        // 아무것도 없으면 null을 반환하기 때문에 그것을 방지하기 위해 Optional로 분기를 나눔
         Shark shark = sharkRepository.findById(id)
                 .orElseThrow();
 
@@ -52,7 +66,6 @@ public class SharkService {
                 .toList();
 
         return new SharkResponse(
-                shark.getId(),
                 shark.getName(),
                 shark.getSpecies(),
                 fishNames

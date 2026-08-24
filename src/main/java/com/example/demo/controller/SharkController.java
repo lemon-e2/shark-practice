@@ -22,7 +22,7 @@ public class SharkController {
     }
 
     @GetMapping
-    public List<Shark> getSharks() {
+    public List<SharkResponse> getSharks() {
         return sharkService.findAll();
     }
 

@@ -10,7 +10,6 @@ import java.util.List;
 // 내가 원하는 모양으로 응답 만들기
 public class SharkResponse {
 
-    private Long id;
     private String name;
     private String species;
 

@@ -5,6 +5,7 @@ import com.example.demo.dto.FishResponse;
 import com.example.demo.dto.UpdateFishRequest;
 import com.example.demo.entity.Fish;
 import com.example.demo.service.FishService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class FishController {
     }
 
     @PostMapping
-    public Fish createFish(@RequestBody CreateFishRequest request) {
+    public Fish createFish(@Valid @RequestBody CreateFishRequest request) {
         return fishService.save(request);
     }
 
